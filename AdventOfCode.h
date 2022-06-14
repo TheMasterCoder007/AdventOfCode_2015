@@ -8,5 +8,6 @@
 // declare functions
 int main();
 void aocDay1();
+void aocDay2();
 
 #endif //ADVENTOFCODE_H

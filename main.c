@@ -35,7 +35,11 @@ int main()
     {
         aocDay1();
     }
-    else if (command > 1 && command <= 25)
+    else if (command == 2)
+    {
+        aocDay2();
+    }
+    else if (command > 2 && command <= 25)
     {
         printf("The code for the day selected is incomplete");
         return 2;
