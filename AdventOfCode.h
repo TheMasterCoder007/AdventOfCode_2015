@@ -9,5 +9,6 @@
 int main();
 void aocDay1();
 void aocDay2();
+void aocDay3();
 
 #endif //ADVENTOFCODE_H

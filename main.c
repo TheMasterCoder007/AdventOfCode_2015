@@ -17,7 +17,7 @@ int main()
     if (commandList == NULL)
     {
         printf("There was a problem opening the command list");
-        return 3;
+        return 2;
     }
 
     while ((ch = fgetc(commandList)) != EOF)
@@ -31,23 +31,21 @@ int main()
     scanf("%d", &command);
 
     // process user input
-    if (command == 1)
+    switch (command)
     {
-        aocDay1();
-    }
-    else if (command == 2)
-    {
-        aocDay2();
-    }
-    else if (command > 2 && command <= 25)
-    {
-        printf("The code for the day selected is incomplete");
-        return 2;
-    }
-    else
-    {
-        printf("The command is invalid");
-        return 1;
+        case 1:
+            aocDay1();
+            break;
+        case 2:
+            aocDay2();
+            break;
+        case 3:
+            aocDay3();
+            break;
+
+        default:
+            printf("The code for the day selected is incomplete or the command is invalid");
+            return 1;
     }
 
     return 0;
