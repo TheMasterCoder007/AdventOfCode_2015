@@ -5,107 +5,121 @@
 #include "AdventOfCode.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
 
+// defines
 #define TRUE    1
 #define FALSE   0
+#define __packed 			__attribute__((__packed__))
 
-void aocDay3()
-{
-    // variables
-    static int houses = 1; // start location counts
-    static char ch;
-    static int enter;
+typedef struct __packed{
+    short pos_x:16;
+    short pos_y:16;
+} coordinates;
 
-    // open text file
-    FILE *input = fopen("Input_Files/Input_3.txt", "r");
+// declare private variables here
+static short houses = 1; // start location counts
+static int ch;
+static char enter;
 
-    // check for problem reading file
-    if (input == NULL)
+    void aocDay3()
     {
-        printf("There was a problem opening the file Input_3.txt\n\n");
-    }
-    else
-    {
-        int count = 0;
+        // open text file
+        FILE *input = fopen("Input_Files/Input_3.txt", "r");
 
-        // find the amount of characters in file
-        while ((ch = fgetc(input)) != EOF)
+        // check for problem reading file
+        if (input == NULL)
         {
-            count++;
+            printf("There was a problem opening the file Input_3.txt\n\n");
         }
-
-        // initialize dynamic array to store stop locations
-        int** stopLocations = malloc(sizeof(int*) * count);
-        for (int i = 0; i < count; i++)
+        else
         {
-            stopLocations[i] = malloc(sizeof(int) * 2);
-        }
-        int x = 0;
-        int y = 0;
-        int arrayLoc = 0;
+            int count = 1;
 
-        while ((ch = fgetc(input)) != EOF)
-        {
-            if (ch == '^')
+            // find the amount of characters in file
+            while ((ch = fgetc(input)) != EOF)
             {
-                y++;
+                count++;
             }
-            else if (ch == 'V')
-            {
-                y--;
-            }
-            else if (ch == '>')
-            {
-                x++;
-            }
-            else if (ch == '<')
-            {
-                x--;
-            }
+            rewind(input);
 
-            stopLocations[arrayLoc][0] = x;
-            stopLocations[arrayLoc][1] = y;
+            // initialize dynamic array to store stop locations
+            int *stopLocations = malloc(sizeof(coordinates) * count);
+            memset(stopLocations, 0, count * sizeof(coordinates));
 
-            arrayLoc++;
-        }
+            int x = 0;
+            int y = 0;
+            int arrayLoc = 1;
 
-        // process data to find number of houses stopped at
-        short increase;
 
-        for (int i = 0; i < count; i++)
-        {
-            for (int x = 0; x < i; x++)
+            while ((ch = fgetc(input)) != EOF)
             {
-                if (stopLocations[i][0] == stopLocations[x][0] && stopLocations[i][1] == stopLocations[x][1])
+                if (ch == '^')
                 {
-                    increase = FALSE;
-                    break;
+                    y++;
+                }
+                else if (ch == 'v')
+                {
+                    y--;
+                }
+                else if (ch == '>')
+                {
+                    x++;
+                }
+                else if (ch == '<')
+                {
+                    x--;
                 }
 
-                increase = TRUE;
+                {
+                    coordinates position;
+                    position.pos_x = x;
+                    position.pos_y = y;
+
+                    stopLocations[arrayLoc] = position;
+                }
+
+                arrayLoc++;
             }
 
-            if (increase == TRUE)
-                houses++;
-        }
+            // process data to find number of houses stopped at
+            unsigned char increase;
 
-        // free memory
-        for (int i = 0; i < count; i++)
-        {
-            free(stopLocations[i]);
+            for (int i = 0; i < count; i++)
+            {
+                if (i == 0)
+                {
+                    increase = TRUE; // first move counts
+                }
+                for (int j = 0; j < i; j++)
+                {
+                    if (stopLocations[i] == stopLocations[j])
+                    {
+                        increase = FALSE;
+                        break;
+                    }
+
+                    increase = TRUE;
+                }
+
+                if (increase == TRUE)
+                    houses++;
+            }
+
+            // free memory
+            free (stopLocations);
         }
-        free (stopLocations);
+        // close text file
+        fclose(input);
+
+        // answers
+        printf("The amount of houses Santa visited is %d houses.\n\n", houses);
+
+        printf("Please press enter to continue...");
+        fflush(stdin);
+        scanf("&d", &enter);
+
+        // re-enter main function
+        main();
     }
-    // close text file
-    fclose(input);
-
-    // answers
-    printf("The amount of houses Santa visited is %d houses.\n\n", houses);
-
-    printf("Please press enter to continue...");
-    fflush(stdin);
-    scanf("&d", &enter);
-
-    // re-enter main function
-    main();
-}
