@@ -37,11 +37,12 @@
 //******************************************************************************
 void aocDay5()
 {
-    // variables
-    static int niceStrings;
-    static int niceStrings2;
-    static char ch;
-    static int enter;
+    // variables for storing nice strings (part 1 and 2)
+    int niceStrings;
+    int niceStrings2;
+
+    // variable for storing character from input file
+    char ch;
 
     // open text file
     FILE *input = fopen("../Day5/input.txt", "r");
@@ -156,6 +157,8 @@ void aocDay5()
     // close text file
     fclose(input);
 
+    // prompt user for input
+    char enter;
     printf("Please press enter to continue...");
     fflush(stdin);
     scanf("%c", &enter);

@@ -60,11 +60,12 @@ static void parseString (char string[]);
 //******************************************************************************
 void aocDay6()
 {
-    // variables
+    // variables for storing which lights are on (part 1 and 2)
     int lightsOn = 0;
     int lightsOn2 = 0;
+
+    // variable for storing character from input file
     char ch;
-    int enter;
 
     // initialize array
     for (int i = 0; i < MAX_LIGHT_GRID_SIZE; i++)
@@ -125,6 +126,8 @@ void aocDay6()
     // close text file
     fclose(input);
 
+    // prompt user for input
+    char enter;
     printf("Please press enter to continue...");
     fflush(stdin);
     scanf("%c", &enter);

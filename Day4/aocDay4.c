@@ -48,9 +48,6 @@ static void *threadHash (void *thread_arg);
 //  PRIVATE GLOBAL VARIABLES
 //------------------------------------------------------------------------------
 
-// character that is used to receive the users input after the answer is generated
-static char enter;
-
 // coin inputs
 static int adventCoinInput  = 0;
 static int adventCoinInput2 = 0;
@@ -311,6 +308,8 @@ void aocDay4()
     printf("The coin key for part 2 is %d\n", adventCoinInput2);
     printf("Hash took %lf seconds.\n\n",hashTime);
 
+    // prompt user for input
+    char enter;
     printf("Please press enter to continue...");
     fflush(stdin);
     scanf("%c", &enter);

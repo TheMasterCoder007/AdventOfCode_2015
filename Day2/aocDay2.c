@@ -35,14 +35,13 @@
 //******************************************************************************
 void aocDay2()
 {
-    // variables
-    static int enter;
-    static int line = 0;
-    static int length[MAX_LINES];
-    static int width[MAX_LINES];
-    static int height[MAX_LINES];
-    static int totalSqFt = 0;
-    static int totalRibbon = 0;
+    // variables for storing packaging instructions and requirements
+    int line = 0;
+    int length[MAX_LINES];
+    int width[MAX_LINES];
+    int height[MAX_LINES];
+    int totalSqFt = 0;
+    int totalRibbon = 0;
 
     // open input file
     FILE *input = fopen("../Day2/input.txt", "r");
@@ -122,7 +121,8 @@ void aocDay2()
     printf("The total square feet of wrapping paper needed is %d\n", totalSqFt);
     printf("The total length of ribbon needed is %d\n\n", totalRibbon);
 
-    // end function and wait for user input to return to main
+    // prompt user for input
+    char enter;
     printf("Please press enter to continue...");
     fflush(stdin);
     scanf("%c", &enter);

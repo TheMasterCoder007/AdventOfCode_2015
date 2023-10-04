@@ -29,12 +29,13 @@
 //******************************************************************************
 void aocDay1()
 {
-    // variables
-    static int floor = 0;
-    static int chPos = 0;
-    static int position = 0;
-    static char ch;
-    static int enter;
+    // variables for storing the floor and position
+    int floor = 0;
+    int chPos = 0;
+    int position = 0;
+
+    // variable for storing the character from the input file
+    char ch;
 
     // open text file
     FILE *input = fopen("../Day1/input.txt", "r");
@@ -74,6 +75,8 @@ void aocDay1()
     // close text file
     fclose(input);
 
+    // prompt user for input
+    char enter;
     printf("Please press enter to continue...");
     fflush(stdin);
     scanf("%c", &enter);

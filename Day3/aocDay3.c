@@ -39,16 +39,6 @@ typedef struct {
     short pos_y2;
 } coordinates;
 
-//------------------------------------------------------------------------------
-//  PRIVATE GLOBAL VARIABLES
-//------------------------------------------------------------------------------
-
-// declare private variables here
-static short houses     = 1; // start location counts
-static short houses_p2  = 1; // start location counts
-static int ch;
-static char enter;
-
 //******************************************************************************
 //
 //  Function: aocDay3
@@ -63,6 +53,13 @@ static char enter;
 //******************************************************************************
 void aocDay3()
 {
+    // variables for storing houses visited (part 1 and 2)
+    short houses     = 1; // start location counts
+    short houses_p2  = 1; // start location counts
+
+    // variable for storing character from input file
+    char ch;
+
     // open text file
     FILE *input = fopen("../Day3/input.txt", "r");
 
@@ -211,6 +208,8 @@ void aocDay3()
     printf("The amount of houses Santa visited is %d houses.\n", houses);
     printf("The amount of houses both Santa's visited is %d houses.\n\n", houses_p2);
 
+    // prompt user for input
+    char enter;
     printf("Please press enter to continue...");
     fflush(stdin);
     scanf("%c", &enter);
